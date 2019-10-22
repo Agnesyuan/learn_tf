@@ -17,7 +17,7 @@ biases = tf.get_variable("biases", [16], initializer=tf.constant_initializer(0.1
 # 最后一个参数是填充，“SAME”表示添加全0填充，使得卷积过后的矩阵和输入的矩阵大小相等（步长为1时），“VALID”表示不添加
 # 比如 一个3X3的矩阵：[[1, -1, 0], [-1, 2, 1], [0, 2, -2]]，经过2X2的过滤器的卷积过程（Tensorflow实现全0填充优先填充右下方）：
 # VALID: [[1, -1, 0], [-1, 2, 1], [0, 2, -2]]--》 [[A, B], [C, D]]
-# SAME: [[0, 0, 0, 0], [0, 1, -1, 0], [0, -1, 2, 1], [0, 0, 2, -2]] --> [[A, B], [C, D]]
+# SAME: [[0, 0, 0, 0], [0, 1, -1, 0], [0, -1, 2, 1], [0, 0, 2, -2]] --> [[Y, W, X], [Y, A, B], [Z, C, D]]
 ## tf.nn.bias_add: 给每个节点加上偏置项，给下一层神经网络2X2矩阵中的每个值都加上这个偏置项
 conv = tf.nn.conv2d(input, filter_weight, strides=[1, 1, 1, 1], padding="SAME")
 bias = tf.nn.bias_add(conv, biases)

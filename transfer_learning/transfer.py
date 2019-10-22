@@ -16,7 +16,7 @@ MODEL_DIR = "./inception_dec_2015"
 # 下载训练好的模型文件名
 MODEL_FILE = "tensorflow_inception_graph.pb"
 # 将原始图像通过inception-v3模型计算得到的特征向量保存在bottleneck文件中
-CACHE_DIR = "./bottleneck"
+CACHE_DIR = "./bottleneck_test"
 # 图片数据文件夹 子文件为类别
 INPUT_DATA = "./flower_photos"
 VALIDATION_PRECENTAGE = 10
@@ -99,7 +99,6 @@ def get_or_create_bottleneck(sess, image_lists, label_name, index, category, jpe
     bottleneck_path = get_bottleneck_path(image_lists, label_name, index, category)
 
     if not os.path.exists(bottleneck_path):
-        
         image_path = get_image_path(image_lists, INPUT_DATA, label_name, index, category)
         image_data = tf.gfile.GFile(image_path, "rb").read()
         

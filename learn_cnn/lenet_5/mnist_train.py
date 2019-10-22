@@ -27,11 +27,9 @@ def train(mnist):
     global_step = tf.Variable(0, trainable=False)
     variable_averages = tf.train.ExponentialMovingAverage(MOVING_AVERAGE_DECAY, global_step)
     variable_averages_op = variable_averages.apply(tf.trainable_variables())
-    #import pdb;pdb.set_trace()
+    
     cross_entropy = tf.nn.softmax_cross_entropy_with_logits(logits=y, labels=y_) # tf.argmax(y_, 1)
-    #cross_entropy = -tf.reduce_sum(y_ * tf.log(y))
     cross_entropy_mean = tf.reduce_mean(cross_entropy)
-    # import pdb;pdb.set_trace()
     loss = cross_entropy_mean + tf.add_n(tf.get_collection("losses"))
     # regularizer = tf.contrib.layers.l2_regularizer(REGULARIZATION_RATE)
     # regularization = regularizer(weights1) + regularizer(weights2)
